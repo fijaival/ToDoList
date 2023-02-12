@@ -1,41 +1,34 @@
 import TodoList from './TodoList';
-import { useState, useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from 'react';
+// import styled from 'styled-components';
+import Header from './Header';
+import Completed from './Completed';
 
-function App() {
+function App() { 
+  const [tab, setTab] = useState("list");
   const [todos, setTodos] = useState([]);
+  const [compTodos, setCompTodos] = useState([]);
 
-  const todoNameRef = useRef();
-
-  const handleAddTodo = () =>{
-    //タスクを追加する
-    const name = todoNameRef.current.value;
-    if (name === "") return;
-    setTodos((prevTodos) => {
-      return [...prevTodos, {id:uuidv4(), name:name, completed: false}]
-    });
-    todoNameRef.current.value = null;
-  };
-
-  const handleClear = () => {
-    const newTodos = todos.filter((todo) => !todo.completed);
-    setTodos(newTodos);
-  }
-
-  const toggleTodo = (id) => {
-    const newTodos = [...todos];
-    const todo =  newTodos.find((todo) => todo.id === id);
-    todo.completed = !todo.completed;
-    setTodos(newTodos);
+  const addCompTask = (comp) => {
+      setCompTodos((prevCompTodos) => [...prevCompTodos, comp[0].name]);
+      // setCompTodos(compTodos)
+      setTab("completed")
+      // console.log(compTodos)
+      // console.log(comp[0].name)
+      // console.log(compTodos)
   };
 
   return (
     <div >
-      <TodoList todos={todos} toggleTodo={toggleTodo}/>
-      <input type="text" ref={todoNameRef}></input>
-      <button onClick={handleAddTodo}>タスクを追加</button>
-      <button onClick={handleClear}>完了したタスクの削除</button>
-      <div>残りのタスク:{todos.filter((todo) => !todo.completed).length}</div>
+      <Header tab={tab} setTab={setTab}/>
+      {/* <div>{compTodos}</div> */}
+      {
+        tab === "list" ? 
+        <TodoList todos={todos} setTodos={setTodos} addCompTask={addCompTask}/>: 
+        <Completed
+         compTodos={compTodos}
+         />
+      }
     </div>
   );
 }
