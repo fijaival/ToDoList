@@ -1,8 +1,12 @@
 import TodoList from './TodoList';
 import { useState } from 'react';
-// import styled from 'styled-components';
 import Header from './Header';
 import Completed from './Completed';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  height: 100%;
+`
 
 function App() { 
   const [tab, setTab] = useState("list");
@@ -10,18 +14,17 @@ function App() {
   const [compTodos, setCompTodos] = useState([]);
 
   const addCompTask = (comp) => {
-      setCompTodos((prevCompTodos) => [...prevCompTodos, comp[0].name]);
-      // setCompTodos(compTodos)
-      setTab("completed")
-      // console.log(compTodos)
-      // console.log(comp[0].name)
-      // console.log(compTodos)
+      comp.map((name) => {
+          setCompTodos((compTodos) => [...compTodos, [name][0].name]);
+      })
+      setTab("completed");
   };
 
+
   return (
-    <div >
+    <Container>
       <Header tab={tab} setTab={setTab}/>
-      {/* <div>{compTodos}</div> */}
+
       {
         tab === "list" ? 
         <TodoList todos={todos} setTodos={setTodos} addCompTask={addCompTask}/>: 
@@ -29,7 +32,7 @@ function App() {
          compTodos={compTodos}
          />
       }
-    </div>
+    </Container>
   );
 }
 

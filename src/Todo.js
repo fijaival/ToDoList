@@ -1,4 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
+
+
+const ListItem = styled.div`
+    padding: 8px 16px;
+     &:nth-child(n+2){
+        border-top: 1px solid #d9d8de;
+     }
+    `
 
 const Todo = ({todo, toggleTodo}) => {
     const handleTodoClick = () => {
@@ -6,7 +15,7 @@ const Todo = ({todo, toggleTodo}) => {
     };
     
     return (
-        <div>
+        <ListItem>
             <label>
                 <input 
                 type="checkbox" 
@@ -14,7 +23,7 @@ const Todo = ({todo, toggleTodo}) => {
                 onChange={handleTodoClick}/>
             </label>
             {todo.name}
-        </div>
+        </ListItem>
     )
 }
 

@@ -13,3 +13,5 @@ const Completed = ({compTodos}) => {
 }
 
 export default Completed
+
+

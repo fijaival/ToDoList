@@ -7,17 +7,22 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 const Input = styled.input`
+font-size: 18px;
 border-radius: 3px;
 padding: 4px 8px;
 border: 1px solid black;
+display: inline;
+
 `
 const Label = styled.label`
     display: flex;
     color: #757575;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 14px; 
+    font-weight: bold; 
 `
-
+const ButtonContainer =styled.div`
+    margin-top: 24px;
+`
 
 const TodoList = ({todos, setTodos, addCompTask}) => {
   const todoNameRef = useRef();
@@ -59,8 +64,10 @@ const TodoList = ({todos, setTodos, addCompTask}) => {
     </div>
     <form onSubmit={submitForm}>
       <Input type="text" ref={todoNameRef}></Input>
+      <Button onClick={handleAddTodo}>タスクを追加</Button>
+
+      <ButtonContainer></ButtonContainer>
       <div>
-        <Button onClick={handleAddTodo}>タスクを追加</Button>
         <Button onClick={handleClear}>完了したタスクの削除</Button>
       </div>
     </form>
