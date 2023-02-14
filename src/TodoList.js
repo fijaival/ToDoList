@@ -17,8 +17,10 @@ display: inline;
 const Label = styled.label`
     display: flex;
     color: #757575;
-    font-size: 14px; 
+    font-size: 16px; 
     font-weight: bold; 
+    padding: 8px 24px;
+
 `
 const ButtonContainer =styled.div`
     margin-top: 24px;
@@ -41,8 +43,6 @@ const TodoList = ({todos, setTodos, addCompTask}) => {
     const compTodos = todos.filter((todo) => todo.completed);
     setTodos(newTodos);
     addCompTask(compTodos);
-    // console.log(compTodos[0].name);
-
   }
 
   const toggleTodo = (id) => {
@@ -59,20 +59,16 @@ const TodoList = ({todos, setTodos, addCompTask}) => {
   return (
   <div>
     <Label>今日のタスクあと{todos.filter((todo) => !todo.completed).length}こ</Label>
+    <form onSubmit={submitForm}>
+      <Input type="text" ref={todoNameRef}></Input>
+      <Button onClick={handleAddTodo}>タスクを追加</Button>  
+    </form>
     <div>
       {todos.map((todo) => <Todo todo={todo} key={todo.id} toggleTodo={toggleTodo}/>)}
     </div>
-    <form onSubmit={submitForm}>
-      <Input type="text" ref={todoNameRef}></Input>
-      <Button onClick={handleAddTodo}>タスクを追加</Button>
+    <Button onClick={handleClear}>タスク完了！</Button>
+    <ButtonContainer></ButtonContainer>
 
-      <ButtonContainer></ButtonContainer>
-      <div>
-        <Button onClick={handleClear}>完了したタスクの削除</Button>
-      </div>
-    </form>
-      
-    
 
   </div> 
  

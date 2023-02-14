@@ -3,11 +3,17 @@ import styled from 'styled-components';
 
 
 const ListItem = styled.div`
-    padding: 8px 16px;
-     &:nth-child(n+2){
-        border-top: 1px solid #d9d8de;
-     }
+    width: 60%;
+    padding: 0.5em 1em;
+    margin: 1em 0;
+    background: #f4f4f4;
+    border-left: solid 6px #ff6347;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.33);
     `
+
+const Label = styled.label`
+    cursor: pointer;
+`
 
 const Todo = ({todo, toggleTodo}) => {
     const handleTodoClick = () => {
@@ -16,13 +22,13 @@ const Todo = ({todo, toggleTodo}) => {
     
     return (
         <ListItem>
-            <label>
+            <Label>
                 <input 
                 type="checkbox" 
                 checked={todo.completed} 
                 onChange={handleTodoClick}/>
-            </label>
-            {todo.name}
+                {todo.name}
+            </Label>
         </ListItem>
     )
 }

@@ -14,10 +14,10 @@ function App() {
   const [compTodos, setCompTodos] = useState([]);
 
   const addCompTask = (comp) => {
-      comp.map((name) => {
+      comp.forEach((name) => {
           setCompTodos((compTodos) => [...compTodos, [name][0].name]);
       })
-      setTab("completed");
+      // setTab("completed") ;
   };
 
 
